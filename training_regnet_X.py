@@ -142,7 +142,7 @@ for epoch in epochs:
     test_loss, test_acc = test(model)  # Modify test() to return the accuracy
     scheduler.step()
     train_loss_hist.append(train_loss)
-    train_acc_hist.append(test_acc)
+    train_acc_hist.append(train_acc)
     test_loss_hist.append(test_loss)
     test_acc_hist.append(test_acc)
 
