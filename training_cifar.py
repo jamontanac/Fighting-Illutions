@@ -6,7 +6,7 @@ import torchvision.transforms as transforms
 from torchvision import models
 import os
 import matplotlib.pylab as plt
-
+import time
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -32,7 +32,7 @@ trainloader = torch.utils.data.DataLoader(
 testset = torchvision.datasets.CIFAR10(
     root='./data', train=False, download=True, transform=transform_test)
 testloader = torch.utils.data.DataLoader(
-    testset, batch_size=100, shuffle=False, num_workers=2)
+    testset, batch_size=128, shuffle=False, num_workers=2)
 
 def init_model(lr=0.001):
     # lr=0.005
@@ -133,7 +133,7 @@ start_epoch = 0
 if os.path.exists("./checkpoint/"+name_model):
     start_epoch, best_acc = load_model(model,name=name_model)
 
-epochs = range(start_epoch,start_epoch+20)
+epochs = range(start_epoch,start_epoch+30)
 # Main loop
 for epoch in epochs:
     train_loss,train_acc = train(epoch,model,optimizer, criterion)
@@ -158,6 +158,7 @@ plt.plot(epochs,test_loss_hist, label = "Training Loss")
 plt.xlabel("Epochs")
 plt.ylabel("Loss")
 
+plt.legend()
 plt.subplot(1,2,2)
 plt.plot(epochs,train_acc_hist, label = "Training Accuracy")
 plt.plot(epochs,test_acc_hist, label = "Training Accuracy")
@@ -166,6 +167,6 @@ plt.ylabel("Accuracy")
 
 plt.legend()
 plt.tight_layout()
-plt.savefig("Result_training"+name_model[:-4]++".png")
+plt.savefig("Result_training"+name_model[:-4]+str(time.time()).split(".")[0]+".png")
 plt.close()
 
