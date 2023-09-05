@@ -1,3 +1,4 @@
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -36,7 +37,8 @@ testloader = torch.utils.data.DataLoader(
 
 def init_model(lr=0.001):
     # lr=0.005
-    model = models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
+    model = models.regnet_y_400mf(weights=torchvision.models.RegNet_Y_400MF_Weights.DEFAULT)
+    # model = models.regnet_x_400mf(weights=torchvision.models.RegNet_X_400MF_Weights.DEFAULT)
     # Fine-tuning: Replace the last layer (classifier)
     num_ftrs = model.fc.in_features
     model.fc = nn.Linear(num_ftrs, 10)
@@ -51,6 +53,7 @@ def init_model(lr=0.001):
                         momentum=0.9, weight_decay=5e-4)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
     return model, criterion, optimizer, scheduler
+
 
 # Function to save the model
 def save_model(epoch, best_acc,model,name="ckpt.pth"):
@@ -127,7 +130,7 @@ test_acc_hist  = []
 model, criterion, optimizer, scheduler = init_model()
 
 # Uncomment to load the model
-name_model="Resnet.pth"
+name_model="Regnet_Y.pth"
 best_acc = 0
 start_epoch = 0
 if os.path.exists("./checkpoint/"+name_model):
@@ -169,4 +172,3 @@ plt.legend()
 plt.tight_layout()
 plt.savefig("Result_training"+name_model[:-4]+str(time.time()).split(".")[0]+".png")
 plt.close()
-
