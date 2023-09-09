@@ -98,7 +98,7 @@ for i,data in enumerate(testloader):
 
 all_adversarial_examples = torch.cat(adversarial_examples)
 all_adversarial_labels = torch.cat(adversarial_labels)
-
+os.makedirs('./Adversarial_examples/FastGradient_Method', exist_ok=True)
 # Save the concatenated adversarial examples and labels
 torch.save(all_adversarial_examples, './Adversarial_examples/FastGradient_Method/all_examples.pt')
 torch.save(all_adversarial_labels, './Adversarial_examples/FastGradient_Method/all_labels.pt')
