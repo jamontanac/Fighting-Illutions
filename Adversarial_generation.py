@@ -102,6 +102,29 @@ os.makedirs('./Adversarial_examples/FastGradient_Method', exist_ok=True)
 # Save the concatenated adversarial examples and labels
 torch.save(all_adversarial_examples, './Adversarial_examples/FastGradient_Method/all_examples.pt')
 torch.save(all_adversarial_labels, './Adversarial_examples/FastGradient_Method/all_labels.pt')
+
+
+#### To load the data
+# Load saved adversarial examples and labels
+# loaded_adversarial_examples = torch.load('./Adversarial_examples/FastGradient_Method/all_examples.pt')
+# loaded_adversarial_labels = torch.load('./Adversarial_examples/FastGradient_Method/all_labels.pt') # here the label is the original label to get the label of the adversarial is necessary to perform inference
+
+
+# Create a TensorDataset from loaded adversarial examples and labels
+# from torch.utils.data import TensorDataset, DataLoader
+
+# adversarial_dataset = TensorDataset(loaded_adversarial_examples, loaded_adversarial_labels)
+
+# Create a DataLoader from the TensorDataset
+# adversarial_dataloader = DataLoader(adversarial_dataset, batch_size=128, shuffle=False)
+##### -------------------------------------------
+#### -----------------------
+# to perform the predictions we need to have the classifier loaded and then perform
+
+
+# Now you can use adversarial_dataloader in your training/testing loop
+
+
 # predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
 # images_denorm = denormalize(images[0].cpu().clone(), mean, std)
 # x_test_adv_denorm = denormalize(torch.tensor(x_test_adv[0]), mean, std)
