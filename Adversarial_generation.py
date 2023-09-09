@@ -27,13 +27,13 @@ testset = torchvision.datasets.CIFAR10(
 testloader = torch.utils.data.DataLoader(
     testset, batch_size=128, shuffle=False, num_workers=2)
 
-def init_model(lr=0.001, model_name="resnet"):
+def init_model(lr=0.001, model_name="Resnet"):
 
-    if model_name == "resnet":
+    if model_name == "Resnet":
         model = models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
-    elif model_name == "regnetx":
+    elif model_name == "Regnet_X":
         model = models.regnet_x_400mf(weights=torchvision.models.RegNet_X_400MF_Weights.DEFAULT)
-    elif model_name == "regnety":
+    elif model_name == "Regnet_Y":
         model = models.regnet_y_400mf(weights=torchvision.models.RegNet_Y_400MF_Weights.DEFAULT)
     
     # Fine-tuning: Replace the last layer (classifier)
@@ -73,8 +73,8 @@ def denormalize(tensor, mean, std):
 mean = torch.tensor([0.4914, 0.4822, 0.4465], dtype=torch.float32)
 std = torch.tensor([0.2023, 0.1994, 0.2010], dtype=torch.float32)
 
-model, criterion, optimizer, scheduler=init_model(model_name="resnet")
 name_model="Resnet.pth"
+model, criterion, optimizer, scheduler=init_model(model_name=name_model[:-4])
 metrics = load_model(model,name=name_model)
 classifier = PyTorchClassifier(model=model,
                                loss=criterion,
@@ -113,5 +113,5 @@ adversarial_data={
 }
 
 # Save the concatenated adversarial examples and labels
-torch.save(adversarial_data, './Adversarial_examples/FastGradient_Method/all_data_denormed.pt')
+torch.save(adversarial_data, f'./Adversarial_examples/FastGradient_Method/all_data_denormed_{name_model[:-4]}.pt')
 
