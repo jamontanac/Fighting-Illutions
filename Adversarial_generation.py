@@ -87,12 +87,9 @@ for i,data in enumerate(testloader):
 
     images,labels=data
     
-    # images, labels = images.to(device), labels.to(device)
     # # Move the images tensor to CPU before generating adversarial examples
     images_cpu = images.cpu().detach().numpy()
     x_test_adv = attack.generate(x=images_cpu)
-    # x_test_adv_gpu = torch.tensor(x_test_adv).to(device)
-    # predictions = np.argmax(classifier.predict(x_test_adv_gpu.cpu().detach().numpy()), axis=1)
     with torch.no_grad():
         predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
     # Denormalize the adversarial examples
@@ -118,38 +115,3 @@ adversarial_data={
 # Save the concatenated adversarial examples and labels
 torch.save(adversarial_data, './Adversarial_examples/FastGradient_Method/all_data_denormed.pt')
 
-
-#### To load the data
-# loaded_data = torch.load('./Adversarial_examples/FastGradient_Method/all_data_denorm.pt')
-# loaded_adversarial_examples = loaded_data['examples']
-# loaded_real_labels = loaded_data['real_labels']
-# loaded_adversarial_labels = loaded_data['adversarial_labels']
-
-
-# Create a TensorDataset from loaded adversarial examples and labels
-# from torch.utils.data import TensorDataset, DataLoader
-
-# adversarial_dataset = TensorDataset(loaded_adversarial_examples, loaded_adversarial_labels)
-
-# Create a DataLoader from the TensorDataset
-# adversarial_dataloader = DataLoader(adversarial_dataset, batch_size=128, shuffle=False)
-##### -------------------------------------------
-#### -----------------------
-# to perform the predictions we need to have the classifier loaded and then perform
-
-
-# Now you can use adversarial_dataloader in your training/testing loop
-
-
-# predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
-# images_denorm = denormalize(images[0].cpu().clone(), mean, std)
-# x_test_adv_denorm = denormalize(torch.tensor(x_test_adv[0]), mean, std)
-# images_denorm = torch.clamp(images_denorm, 0, 1)
-# x_test_adv_denorm = torch.clamp(x_test_adv_denorm, 0, 1)
-
-# fig, ax = plt.subplots(2, 1, figsize=(2,5))
-# ax[0].imshow(images_denorm.permute(1, 2, 0))
-# ax[0].set_title(f"CIFAR label: {labels[0].item()}")
-# ax[1].imshow(x_test_adv_denorm.permute(1, 2, 0))
-# ax[1].set_title(f"Adversarial example {predictions[0]}:")
-# plt.show()
