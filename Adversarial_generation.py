@@ -78,36 +78,52 @@ name_model="Resnet.pth"
 metrics = load_model(model,name=name_model)
 classifier = PyTorchClassifier(model=model,
                                loss=criterion,
-                               optimizer=optimizer,nb_classes=10,input_shape=(3,32,32))
-
-
+                               optimizer=optimizer,nb_classes=10,input_shape=(3,32,32),device_type="gpu")
 attack = FastGradientMethod(estimator=classifier,eps=0.05)
 adversarial_examples = []
 adversarial_labels = []
-
+real_labels= []
 for i,data in enumerate(testloader):
+
     images,labels=data
+    
+    # images, labels = images.to(device), labels.to(device)
     # # Move the images tensor to CPU before generating adversarial examples
     images_cpu = images.cpu().detach().numpy()
     x_test_adv = attack.generate(x=images_cpu)
-    # torch.save(torch.tensor(x_test_adv),f"./Adversarial_examples/FastGradient_Method/batch_{i}.pt")
-    # torch.save(labels, f'./Adversarial_examples/FastGradient_Method/labels_{i}.pt')
-    adversarial_examples.append(torch.tensor(x_test_adv))
-    adversarial_labels.append(labels)
+    # x_test_adv_gpu = torch.tensor(x_test_adv).to(device)
+    # predictions = np.argmax(classifier.predict(x_test_adv_gpu.cpu().detach().numpy()), axis=1)
+    with torch.no_grad():
+        predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
+    # Denormalize the adversarial examples
+    x_test_adv_denorm = [denormalize(torch.tensor(x), mean, std) for x in x_test_adv]
+    
+    adversarial_examples.extend(x_test_adv_denorm)
+    real_labels.extend(labels.cpu().numpy())
+    adversarial_labels.extend(predictions)
 
 
-all_adversarial_examples = torch.cat(adversarial_examples)
-all_adversarial_labels = torch.cat(adversarial_labels)
+all_adversarial_examples = torch.stack(adversarial_examples)
+all_real_labels = torch.tensor(real_labels)
+all_adversarial_labels =  torch.tensor(adversarial_labels)
+
 os.makedirs('./Adversarial_examples/FastGradient_Method', exist_ok=True)
+
+adversarial_data={
+    'examples': all_adversarial_examples,
+    'real_labels': all_real_labels,
+    'adversarial_labels': all_adversarial_labels
+}
+
 # Save the concatenated adversarial examples and labels
-torch.save(all_adversarial_examples, './Adversarial_examples/FastGradient_Method/all_examples.pt')
-torch.save(all_adversarial_labels, './Adversarial_examples/FastGradient_Method/all_labels.pt')
+torch.save(adversarial_data, './Adversarial_examples/FastGradient_Method/all_data_denormed.pt')
 
 
 #### To load the data
-# Load saved adversarial examples and labels
-# loaded_adversarial_examples = torch.load('./Adversarial_examples/FastGradient_Method/all_examples.pt')
-# loaded_adversarial_labels = torch.load('./Adversarial_examples/FastGradient_Method/all_labels.pt') # here the label is the original label to get the label of the adversarial is necessary to perform inference
+# loaded_data = torch.load('./Adversarial_examples/FastGradient_Method/all_data_denorm.pt')
+# loaded_adversarial_examples = loaded_data['examples']
+# loaded_real_labels = loaded_data['real_labels']
+# loaded_adversarial_labels = loaded_data['adversarial_labels']
 
 
 # Create a TensorDataset from loaded adversarial examples and labels
