@@ -65,32 +65,6 @@ def init_model(lr:float=0.001,model_name:str="Resnet")->Tuple[torch.nn.Module,to
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
     return model, criterion, optimizer, scheduler
 
-
-# # Function to save the model
-# def save_model(epoch, best_acc,model,name="ckpt.pth"):
-#     print('Saving..')
-#     state = {
-#         'model': model.state_dict(),
-#         'acc': best_acc,
-#         'epoch': epoch,
-#     }
-#     if not os.path.isdir('checkpoint'):
-#         os.mkdir('checkpoint')
-#     torch.save(state, './data/06_models'+name)
-
-
-# # Function to load the model
-# def load_model(model,name="ckpt.pth"):
-#     global best_acc
-#     logger = logging.getLogger(__name__)
-#     logger.info('==> Resuming from checkpoint..')
-#     assert os.path.isdir('checkpoint'), 'Error: no checkpoint directory found!'
-#     checkpoint = torch.load('./checkpoint/'+name)
-#     model.load_state_dict(checkpoint['model'])
-#     best_acc = checkpoint['acc']
-#     start_epoch = checkpoint['epoch']
-#     return start_epoch, best_acc
-    
 # Training function
 def train(epoch:int,model:torch.nn.Module,optimizer:torch.optim.Optimizer, criterion:torch.nn.Module,trainloader:torch.utils.data.DataLoader)-> Tuple[float,float]:
     logger = logging.getLogger(__name__)
@@ -139,7 +113,7 @@ def test(model:torch.nn.Module,criterion:torch.nn.Module,testloader:torch.utils.
     # print(f"Accuracy of the network on the {total} test images: {acc}%")
     return test_loss/total, acc  # Add this line to return the test accuracy
 
-def Train_model(parameters:Dict)->Tuple[torch.nn.Module,pd.Series,pd.Series, pd.Series, pd.Series]:
+def Train_model(parameters:Dict)->Tuple[torch.nn.Module,pd.DataFrame]:
     train_loss_hist = []
     test_loss_hist  = []
     train_acc_hist  = []
@@ -167,9 +141,10 @@ def Train_model(parameters:Dict)->Tuple[torch.nn.Module,pd.Series,pd.Series, pd.
             best_model = model
             # save_model(epoch, test_acc,model, name=name_model)
             best_acc = test_acc
-            best_epoch = epoch
-        logger.info(f"Best model so far has {best_acc} and was on the epoch {best_epoch}")
-    return best_model,pd.Series(train_loss_hist,name="Train Loss"),pd.Series(train_acc_hist,name="Train Accuracy"), pd.Series(test_loss_hist,name="Test Loss"), pd.Series(test_acc_hist,name="Test Accuracy")
+            best_epoch = epoch+1
+        logger.info(f"Best model so far has Accuracy of {best_acc}% and was on the epoch {best_epoch}")
+    
+    return best_model,pd.concat([pd.Series(train_loss_hist,name="Train Loss"),pd.Series(train_acc_hist,name="Train Accuracy"), pd.Series(test_loss_hist,name="Test Loss"), pd.Series(test_acc_hist,name="Test Accuracy")],axis=1)
 
 
 # print("Finished Training")

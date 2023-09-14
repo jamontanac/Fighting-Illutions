@@ -4,12 +4,12 @@
 # Documentation for this file format can be found in "Parameters"
 # Link: https://docs.kedro.org/en/0.18.13/configuration/parameters.html
 training_parameters_Resnet:
-  epochs: 30
+  epochs: 3
   model_name: "Resnet"
 
 training_parameters_RegnetX:
-  epochs: 30
+  epochs: 3
   model_name: "Regnet_x"
 training_parameters_RegnetY:
-  epochs: 30
+  epochs: 3
   model_name: "Regnet_y"

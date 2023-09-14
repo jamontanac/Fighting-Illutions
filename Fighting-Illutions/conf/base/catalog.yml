@@ -6,28 +6,27 @@
 Resnet_model:
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
   filepath: data/06_models/Resnet.pth
-  # metadata:
-  #   kedro-viz:
-  #     layer: Training
 
 Regnet_x_model:
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
   filepath: data/06_models/Regnet_x.pth
+
 Regnet_y_model:
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
   filepath: data/06_models/Resnet.pth
-"{model_name}_loss_train":
-  type: pandas.CSVDataSet
-  filepath: data/08_reporting/{model_name}_loss_train.csv
 
-"{model_name}_accuracy_train":
+"{model_name}_report_train_test":
   type: pandas.CSVDataSet
-  filepath: data/08_reporting/{model_name}_accuracy_train.csv
+  filepath: data/08_reporting/{model_name}_loss_train_report.csv
 
-"{model_name}_loss_test":
-  type: pandas.CSVDataSet
-  filepath: data/08_reporting/{model_name}_loss_test.csv
+# "{model_name}_accuracy_loss_dataframe":
+#   type: pandas.CSVDataSet
+#   filepath: data/08_reporting/{model_name}_report.csv
 
-"{model_name}_accuracy_test":
-  type: pandas.CSVDataSet
-  filepath: data/08_reporting/{model_name}_accuracy_test.csv
+# "{model_name}_loss_test":
+#   type: pandas.CSVDataSet
+#   filepath: data/08_reporting/{model_name}_loss_test.csv
+
+# "{model_name}_accuracy_test":
+#   type: pandas.CSVDataSet
+#   filepath: data/08_reporting/{model_name}_accuracy_test.csv
