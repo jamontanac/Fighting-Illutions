@@ -9,15 +9,15 @@ import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
 from torchvision import models
-# import os
-# import matplotlib.pylab as plt
-# import time
 from typing import Tuple,Dict, List
 import logging
-# import numpy as np
 import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
 def Create_data_loader()-> torch.utils.data.DataLoader:
     # Data Preprocessing
     transform_train = transforms.Compose([
@@ -43,6 +43,8 @@ def Create_data_loader()-> torch.utils.data.DataLoader:
     testloader = torch.utils.data.DataLoader(
         testset, batch_size=128, shuffle=False, num_workers=2)
     return trainloader,testloader
+
+
 def init_model(lr:float=0.001,model_name:str="Resnet")->Tuple[torch.nn.Module,torch.nn.Module,torch.optim.Optimizer,torch.optim.lr_scheduler.LRScheduler]:
     if model_name == "Resnet":
         model = models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
@@ -142,7 +144,30 @@ def Train_model(parameters:Dict)->Tuple[torch.nn.Module,pd.DataFrame]:
             # save_model(epoch, test_acc,model, name=name_model)
             best_acc = test_acc
             best_epoch = epoch+1
-        logger.info(f"Best model so far has Accuracy of {best_acc}% and was on the epoch {best_epoch}")
+        logger.info(f"Best model for {name_model} so far has Accuracy of {best_acc}% and was on the epoch {best_epoch}")
     
     return best_model,pd.concat([pd.Series(train_loss_hist,name="Train Loss"),pd.Series(train_acc_hist,name="Train Accuracy"), pd.Series(test_loss_hist,name="Test Loss"), pd.Series(test_acc_hist,name="Test Accuracy")],axis=1)
 
+def plot_results(df:pd.DataFrame)->go.Figure:
+    # Create subplots
+    fig = make_subplots(rows=1, cols=2, subplot_titles=("Train and Test Loss", "Train and Test Accuracy"))
+
+    # Add traces for Loss
+    fig.add_trace(go.Scatter(x=df.index, y=df['Train Loss'], mode='lines+markers', name='Train Loss'), row=1, col=1)
+    fig.add_trace(go.Scatter(x=df.index, y=df['Test Loss'], mode='lines+markers', name='Test Loss'), row=1, col=1)
+
+    # Add traces for Accuracy
+    fig.add_trace(go.Scatter(x=df.index, y=df['Train Accuracy'], mode='lines+markers', name='Train Accuracy'), row=1, col=2)
+    fig.add_trace(go.Scatter(x=df.index, y=df['Test Accuracy'], mode='lines+markers', name='Test Accuracy'), row=1, col=2)
+
+    # Update xaxis titles
+    fig.update_xaxes(title_text="Epochs", row=1, col=1)
+    fig.update_xaxes(title_text="Epochs", row=1, col=2)
+
+    # Update yaxis titles
+    fig.update_yaxes(title_text="Loss", row=1, col=1)
+    fig.update_yaxes(title_text="Accuracy", row=1, col=2)
+
+    # Update layout and titles
+    fig.update_layout(title_text="Training and Testing Metrics Over Epochs")
+    return fig

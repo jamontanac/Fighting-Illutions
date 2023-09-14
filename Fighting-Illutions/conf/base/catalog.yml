@@ -19,6 +19,9 @@ Regnet_y_model:
   type: pandas.CSVDataSet
   filepath: data/08_reporting/{model_name}_loss_train_report.csv
 
+"{model_name}#_plot_result":
+  type: plotly.JSONDataSet
+  filepath: data/08_reporting/{model_name}_plot_results.json
 # "{model_name}_accuracy_loss_dataframe":
 #   type: pandas.CSVDataSet
 #   filepath: data/08_reporting/{model_name}_report.csv
