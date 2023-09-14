@@ -146,24 +146,3 @@ def Train_model(parameters:Dict)->Tuple[torch.nn.Module,pd.DataFrame]:
     
     return best_model,pd.concat([pd.Series(train_loss_hist,name="Train Loss"),pd.Series(train_acc_hist,name="Train Accuracy"), pd.Series(test_loss_hist,name="Test Loss"), pd.Series(test_acc_hist,name="Test Accuracy")],axis=1)
 
-
-# print("Finished Training")
-# # reporting the model in the specific run
-# plt.figure(figsize=(12,6))
-# plt.subplot(1,2,1)
-# plt.plot(epochs,train_loss_hist, label = "Training Loss")
-# plt.plot(epochs,test_loss_hist, label = "Test Loss")
-# plt.xlabel("Epochs")
-# plt.ylabel("Loss")
-
-# plt.legend()
-# plt.subplot(1,2,2)
-# plt.plot(epochs,train_acc_hist, label = "Training Accuracy")
-# plt.plot(epochs,test_acc_hist, label = "Test Accuracy")
-# plt.xlabel("Epochs")
-# plt.ylabel("Accuracy")
-
-# plt.legend()
-# plt.tight_layout()
-# plt.savefig("Result_training"+name_model[:-4]+str(time.time()).split(".")[0]+".png")
-# plt.close()

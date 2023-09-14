@@ -22,7 +22,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         pipe = pipeline_instance,
         parameters={"params:model_options":"params:training_parameters_Resnet"},
         outputs={"model":"Resnet_model",
-                "report": "Resnet_report_train_test"},
+                "report": "Resnet#_report_train_test"},
         namespace="Resnet_pipeline"
     )
         
@@ -30,14 +30,14 @@ def create_pipeline(**kwargs) -> Pipeline:
         pipe = pipeline_instance,
         parameters={"params:model_options":"params:training_parameters_RegnetX"},
         outputs={"model":"Regnet_x_model",
-                "report": "Regnet_x_report_train_test"},
+                "report": "Regnet_x#_report_train_test"},
         namespace="Regnet_x_pipeline"
     )
     RegnetY_pipeline = pipeline(
         pipe = pipeline_instance,
         parameters={"params:model_options":"params:training_parameters_RegnetY"},
         outputs={"model":"Regnet_y_model",
-                "report": "Regnet_y_report_train_test"},
+                "report": "Regnet_y#_report_train_test"},
         namespace="Regnet_y_pipeline"
     )
     return Resnet_pipeline+RegnetX_pipeline+RegnetY_pipeline
