@@ -13,5 +13,6 @@ def register_pipelines() -> dict[str, Pipeline]:
     """
     pipelines = find_pipelines()
     # pipelines["Training"] = pipeline(pipelines["training"])
-    pipelines["__default__"] = sum(pipelines.values())
+    # pipelines["__default__"] = sum(pipelines.values())
+    pipelines["__default__"] = pipelines["generate_adversarial_examples"]
     return pipelines

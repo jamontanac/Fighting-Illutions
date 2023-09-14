@@ -22,14 +22,13 @@ Regnet_y_model:
 "{model_name}#_plot_result":
   type: plotly.JSONDataSet
   filepath: data/08_reporting/{model_name}_plot_results.json
-# "{model_name}_accuracy_loss_dataframe":
-#   type: pandas.CSVDataSet
-#   filepath: data/08_reporting/{model_name}_report.csv
 
-# "{model_name}_loss_test":
-#   type: pandas.CSVDataSet
-#   filepath: data/08_reporting/{model_name}_loss_test.csv
-
-# "{model_name}_accuracy_test":
-#   type: pandas.CSVDataSet
-#   filepath: data/08_reporting/{model_name}_accuracy_test.csv
+Resnet_FSGM:
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+  filepath: data/04_feature/Resnet_FSGM.pt
+Regnet_x_FSGM:
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+  filepath: data/04_feature/Regnet_x_FSGM.pt
+Regnet_y_FSGM:
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+  filepath: data/04_feature/Regnet_y_FSGM.pt

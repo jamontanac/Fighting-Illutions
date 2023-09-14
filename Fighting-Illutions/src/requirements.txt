@@ -16,3 +16,4 @@ kedro-viz
 torch
 torchvision
 matplotlib
+adversarial-robustness-toolbox
