@@ -92,13 +92,12 @@ def init_model(lr:float=0.001,model_name:str="Resnet")->Tuple[torch.nn.Module,to
 #     return start_epoch, best_acc
     
 # Training function
-def train(epoch:int,model:torch.nn.Module,optimizer:torch.optim.Optimizer, criterion:torch.nn.Module)-> Tuple[float,float]:
+def train(epoch:int,model:torch.nn.Module,optimizer:torch.optim.Optimizer, criterion:torch.nn.Module,trainloader:torch.utils.data.DataLoader)-> Tuple[float,float]:
     logger = logging.getLogger(__name__)
     model.train()
     correct = 0
     total = 0
     train_loss = 0
-    trainloader, testloader = Create_data_loader()
     for i, data in enumerate(trainloader):
         inputs, labels = data
         inputs, labels = inputs.to(device), labels.to(device)
@@ -119,13 +118,12 @@ def train(epoch:int,model:torch.nn.Module,optimizer:torch.optim.Optimizer, crite
     acc= 100* correct/total 
     return train_loss/total, acc
 # Test function
-def test(model:torch.nn.Module,criterion:torch.nn.Module) -> Tuple[float,float]:
+def test(model:torch.nn.Module,criterion:torch.nn.Module,testloader:torch.utils.data.DataLoader) -> Tuple[float,float]:
     model.eval()
     test_loss = 0
     correct = 0
     total = 0
     logger = logging.getLogger(__name__)
-    trainloader, testloader = Create_data_loader()
     with torch.no_grad():
         for data in testloader:
             images, labels = data
@@ -152,10 +150,12 @@ def Train_model(parameters:Dict)->Tuple[torch.nn.Module,pd.Series,pd.Series, pd.
 
     logger = logging.getLogger(__name__)
     epochs = range(0,parameters["epochs"])
+    
+    trainloader, testloader = Create_data_loader()
     # Main loop
     for epoch in epochs:
-        train_loss,train_acc = train(epoch,model,optimizer, criterion)
-        test_loss, test_acc = test(model,criterion)
+        train_loss,train_acc = train(epoch,model,optimizer, criterion,trainloader)
+        test_loss, test_acc = test(model,criterion,testloader)
         scheduler.step()
         train_loss_hist.append(train_loss)
         train_acc_hist.append(train_acc)

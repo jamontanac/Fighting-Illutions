@@ -15,8 +15,7 @@ Regnet_x_model:
   filepath: data/06_models/Regnet_x.pth
 Regnet_y_model:
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
-  filepath: data/06_models/Regnet_y.pth
-  
+  filepath: data/06_models/Resnet.pth
 "{model_name}_loss_train":
   type: pandas.CSVDataSet
   filepath: data/08_reporting/{model_name}_loss_train.csv
