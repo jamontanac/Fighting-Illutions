@@ -2,3 +2,33 @@
 #
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+Resnet_model:
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
+  filepath: data/06_models/Resnet.pth
+  # metadata:
+  #   kedro-viz:
+  #     layer: Training
+
+Regnet_x_model:
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
+  filepath: data/06_models/Regnet_x.pth
+Regnet_y_model:
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
+  filepath: data/06_models/Regnet_y.pth
+  
+"{model_name}_loss_train":
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/{model_name}_loss_train.csv
+
+"{model_name}_accuracy_train":
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/{model_name}_accuracy_train.csv
+
+"{model_name}_loss_test":
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/{model_name}_loss_test.csv
+
+"{model_name}_accuracy_test":
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/{model_name}_accuracy_test.csv

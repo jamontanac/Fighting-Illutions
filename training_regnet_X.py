@@ -51,6 +51,8 @@ def init_model(lr=0.001):
     optimizer = optim.SGD(model.parameters(), lr=lr,
                         momentum=0.9, weight_decay=5e-4)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
+
+    print(type( model ), type( criterion ), type(optimizer), type(scheduler))
     return model, criterion, optimizer, scheduler
 
 
@@ -129,45 +131,45 @@ test_acc_hist  = []
 model, criterion, optimizer, scheduler = init_model()
 
 # Uncomment to load the model
-name_model="Regnet_X.pth"
-best_acc = 0
-start_epoch = 0
-if os.path.exists("./checkpoint/"+name_model):
-    start_epoch, best_acc = load_model(model,name=name_model)
+# name_model="Regnet_X.pth"
+# best_acc = 0
+# start_epoch = 0
+# if os.path.exists("./checkpoint/"+name_model):
+#     start_epoch, best_acc = load_model(model,name=name_model)
 
-epochs = range(start_epoch,start_epoch+30)
-# Main loop
-for epoch in epochs:
-    train_loss,train_acc = train(epoch,model,optimizer, criterion)
-    test_loss, test_acc = test(model)  # Modify test() to return the accuracy
-    scheduler.step()
-    train_loss_hist.append(train_loss)
-    train_acc_hist.append(train_acc)
-    test_loss_hist.append(test_loss)
-    test_acc_hist.append(test_acc)
+# epochs = range(start_epoch,start_epoch+30)
+# # Main loop
+# for epoch in epochs:
+#     train_loss,train_acc = train(epoch,model,optimizer, criterion)
+#     test_loss, test_acc = test(model)  # Modify test() to return the accuracy
+#     scheduler.step()
+#     train_loss_hist.append(train_loss)
+#     train_acc_hist.append(train_acc)
+#     test_loss_hist.append(test_loss)
+#     test_acc_hist.append(test_acc)
 
-    # Save the model if test accuracy is greater than best_acc
-    if test_acc > best_acc:
-        save_model(epoch, test_acc,model, name=name_model)
-        best_acc = test_acc
+#     # Save the model if test accuracy is greater than best_acc
+#     if test_acc > best_acc:
+#         save_model(epoch, test_acc,model, name=name_model)
+#         best_acc = test_acc
 
-print("Finished Training")
-# reporting the model in the specific run
-plt.figure(figsize=(12,6))
-plt.subplot(1,2,1)
-plt.plot(epochs,train_loss_hist, label = "Training Loss")
-plt.plot(epochs,test_loss_hist, label = "Test Loss")
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
+# print("Finished Training")
+# # reporting the model in the specific run
+# plt.figure(figsize=(12,6))
+# plt.subplot(1,2,1)
+# plt.plot(epochs,train_loss_hist, label = "Training Loss")
+# plt.plot(epochs,test_loss_hist, label = "Test Loss")
+# plt.xlabel("Epochs")
+# plt.ylabel("Loss")
 
-plt.legend()
-plt.subplot(1,2,2)
-plt.plot(epochs,train_acc_hist, label = "Training Accuracy")
-plt.plot(epochs,test_acc_hist, label = "Test Accuracy")
-plt.xlabel("Epochs")
-plt.ylabel("Accuracy")
+# plt.legend()
+# plt.subplot(1,2,2)
+# plt.plot(epochs,train_acc_hist, label = "Training Accuracy")
+# plt.plot(epochs,test_acc_hist, label = "Test Accuracy")
+# plt.xlabel("Epochs")
+# plt.ylabel("Accuracy")
 
-plt.legend()
-plt.tight_layout()
-plt.savefig("Result_training"+name_model[:-4]+str(time.time()).split(".")[0]+".png")
-plt.close()
+# plt.legend()
+# plt.tight_layout()
+# plt.savefig("Result_training"+name_model[:-4]+str(time.time()).split(".")[0]+".png")
+# plt.close()
