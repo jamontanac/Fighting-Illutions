@@ -32,3 +32,17 @@ Regnet_x_FSGM:
 Regnet_y_FSGM:
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
   filepath: data/04_feature/Regnet_y_FSGM.pt
+
+# _pytorchdata: &torchdata
+  # type:  Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+
+"{model_type}_Adversarial_{attack}@Dataset":
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+  filepath:  data/04_feature/{model_type}_Adversarial_{attack}.pt
+# {% set attack = 'FSGM' %}
+# {% set model_types = ['Resnet','Regnet_x','Regnet_y'] %}
+# {% for model_type in model_types %}
+# {{ model_type }}_{{ attack }}@Dataset:
+#   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+#   filepath: data/04_feature/{{ model_type }}_Adversarial_{{ attack }}.pt
+# {% endfor %}

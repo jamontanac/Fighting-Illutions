@@ -6,3 +6,39 @@
 
 Fast_Signed_attack:
   eps: [0.01,0.05,0.1,0.5,1]
+
+
+Adversarial_Attacks:
+  FSGM:
+    module: art.attacks.evasion
+    class: FastGradientMethod
+    kwargs:
+      # eps_step: 0.001
+      eps: 0.01
+      norm: inf
+      minimal: False
+      batch_size: 128
+      targeted: False #This means that we do not care for specific class
+  DeepFool:
+    module: art.attacks.evasion
+    class: DeepFool 
+    kwargs:
+      max_iter: 10
+      epsilon: 0.001
+      nb_grads: 10
+      batch_size: 128
+  CarliniL2:
+    module: art.attacks.evasion
+    class: CarliniL2Method 
+    kwargs:
+      confidence: 0.0
+      targeted: False
+      learning_rate: 0.01
+      binary_search_steps: 5
+      max_iter: 10
+      initial_const: 0.01
+      max_halving: 5
+      max_doubling: 5
+      batch_size: 128
+      verbose: True
+  

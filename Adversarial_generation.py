@@ -12,7 +12,7 @@ from art.attacks.evasion import FastGradientMethod
 from art.estimators.classification import PyTorchClassifier
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+print(device)
 # Data Preprocessing
 transform_test = transforms.Compose(
     [
@@ -95,6 +95,7 @@ for name_model in names:
         device_type = "gpu"
     else:
         device_type = "cpu"
+    
     classifier = PyTorchClassifier(
         model=model,
         loss=criterion,
@@ -104,7 +105,9 @@ for name_model in names:
         device_type=device_type,
     )
 
-    attack = FastGradientMethod(estimator=classifier, eps=0.05)
+    # attack = FastGradientMethod(estimator=classifier, eps=0.01, eps_step= 0.001, norm="inf", minimal= True, batch_size=128,targeted=False)
+    attack = FastGradientMethod(estimator=classifier, eps=0.01, norm="inf", batch_size=128,targeted=False)
+    # print(type(attack))
     adversarial_examples = []
     adversarial_labels = []
     real_labels = []
@@ -114,7 +117,7 @@ for name_model in names:
 
         # # Move the images tensor to CPU before generating adversarial examples
         images_cpu = images.cpu().detach().numpy()
-        x_test_adv = attack.generate(x=images_cpu)
+        x_test_adv = attack.generate(x=images_cpu,y=labels.cpu().numpy())
         with torch.no_grad():
             predictions = np.argmax(classifier.predict(images_cpu), axis=1)
             adver_predictions = np.argmax(classifier.predict(x_test_adv), axis=1)
@@ -148,3 +151,7 @@ for name_model in names:
         adversarial_data,
         f"./Adversarial_examples/FastGradient_Method/all_data_denormed_{name_model[:-4]}.pt",
     )
+    old_accuracy = (all_real_labels == all_model_labels).sum().item()/ all_real_labels.size(0)
+    new_accuracy =  (all_real_labels == all_adversarial_labels).sum().item()/ all_real_labels.size(0)
+    print(f"Accuracy of the model {name_model} was {old_accuracy*100:.3f}% and now is {new_accuracy*100:.3f}%")
+    print(attack.attack_params[0])
