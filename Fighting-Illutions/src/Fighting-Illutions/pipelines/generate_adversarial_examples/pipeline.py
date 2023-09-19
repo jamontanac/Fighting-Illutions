@@ -7,6 +7,16 @@ from kedro.pipeline import Pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline
 from .nodes import classification, Adversarial_generation
 from typing import List
+from kedro.config import ConfigLoader
+from kedro.framework.project import settings
+
+# conf_loader = OmegaConfigLoader(conf_source=settings.CONF_SOURCE)
+# print(conf_loader.config_patterns.get("parameters"))
+conf_loader = ConfigLoader(conf_source=settings.CONF_SOURCE)
+# print(conf_loader.get("parameters*"))
+parameters = conf_loader["parameters"]
+# print(parameters["Attacks_to_use"]["attacks"])
+
 def new_attack_generation_template() -> Pipeline:
     """
     This 2 node pipeline will generate the classifier 
@@ -43,7 +53,8 @@ def new_attack_generation_template() -> Pipeline:
         outputs=["Adversarial_Data"]
     )
 
-def create_pipeline(attack_types:List[str]=["FSGM","DeepFool"]) -> Pipeline:
+
+def create_pipeline(attack_types:List[str]=parameters["Attacks_to_use"]["attacks"]) -> Pipeline:
     """This function will create a complete modelling
     pipeline that consolidates a single shared 'model' stage,
     several modular instances of the 'training' stage

@@ -24,7 +24,7 @@ Adversarial_Attacks:
     class: DeepFool 
     kwargs:
       max_iter: 10
-      epsilon: 0.001
+      epsilon: 0.01
       nb_grads: 10
       batch_size: 128
   CarliniL2:
@@ -41,4 +41,6 @@ Adversarial_Attacks:
       max_doubling: 5
       batch_size: 128
       verbose: True
-  
+
+Attacks_to_use:
+  attacks: ["CarliniL2","DeepFool", "FSGM"] 

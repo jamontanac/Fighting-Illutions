@@ -18,8 +18,8 @@ def register_pipelines() -> dict[str, Pipeline]:
     # Adversarial_generation_pipe = generate_adversarial_examples.create_pipline(attack_types= ["FSGM"] )
 
     # pipelines["Training"] = pipeline(pipelines["training"])
-    # pipelines["__default__"] = sum(pipelines.values())
-    pipelines["__default__"] = pipelines["generate_adversarial_examples"]
+    pipelines["__default__"] = sum(pipelines.values())
+    # pipelines["__default__"] = pipelines["generate_adversarial_examples"]
     return pipelines
     # return {
         # "__default__": Adversarial_generation_pipe,
