@@ -52,5 +52,5 @@ Adversarial_Attacks:
       num_random_init: 1
 
 Attacks_to_use:
-  # attacks: ["DeepFool", "CarliniL2","FSGM","PGD"]
-  attacks: ["PGD"] 
+  attacks: ["DeepFool", "CarliniL2","FSGM","PGD"]
+  # attacks: ["PGD"] 
