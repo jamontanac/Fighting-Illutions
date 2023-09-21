@@ -41,7 +41,6 @@ Adversarial_Attacks:
       max_doubling: 5
       batch_size: 256
       verbose: True
-
   PGD:
     module: art.attacks.evasion
     class: ProjectedGradientDescent 

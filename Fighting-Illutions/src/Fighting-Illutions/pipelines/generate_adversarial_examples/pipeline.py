@@ -55,6 +55,7 @@ def new_attack_generation_template() -> Pipeline:
 
 
 def create_pipeline(attack_types:List[str]=parameters["Attacks_to_use"]["attacks"]) -> Pipeline:
+# def create_pipeline(attack_types:List[str]=["FSGM"]) -> Pipeline:
     """This function will create a complete modelling
     pipeline that consolidates a single shared 'model' stage,
     several modular instances of the 'training' stage
