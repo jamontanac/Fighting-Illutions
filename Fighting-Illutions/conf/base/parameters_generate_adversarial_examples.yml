@@ -46,11 +46,11 @@ Adversarial_Attacks:
     class: ProjectedGradientDescent 
     kwargs:
       eps: 0.01
-      eps_step: 0.005
+      eps_step: 0.001
       max_iter: 10
       batch_size: 256
       num_random_init: 1
 
 Attacks_to_use:
   # attacks: ["DeepFool", "CarliniL2","FSGM","PGD"]
-  attacks: ["FSGM"] 
+  attacks: ["PGD"] 
