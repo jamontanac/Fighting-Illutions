@@ -53,4 +53,3 @@ Adversarial_Attacks:
 
 Attacks_to_use:
   attacks: ["DeepFool", "CarliniL2","FSGM","PGD"]
-  # attacks: ["PGD"] 
