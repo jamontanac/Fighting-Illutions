@@ -7,18 +7,17 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
+import torch.nn.functional as F
 import art
 import numpy as np
-from art.attacks.evasion import FastGradientMethod, DeepFool
+# from art.attacks.evasion import ProjectedGradientDescent
 from art.estimators.classification import PyTorchClassifier
-
 from typing import Tuple,Dict, List,Any
 import logging
 import importlib
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def Create_data_loader()-> torch.utils.data.DataLoader:
+def Create_data_loader(batch_size=128)-> torch.utils.data.DataLoader:
 
     transform_test = transforms.Compose([
         transforms.ToTensor(),
@@ -28,7 +27,7 @@ def Create_data_loader()-> torch.utils.data.DataLoader:
     testset = torchvision.datasets.CIFAR10(
         root='./data/01_raw', train=False, download=True, transform=transform_test)
     testloader = torch.utils.data.DataLoader(
-        testset, batch_size=128, shuffle=False, num_workers=2)
+        testset, batch_size=batch_size, shuffle=False, num_workers=2)
     return testloader
 
 
@@ -92,21 +91,36 @@ def Adversarial_generation(classifier, attack_params: Dict):
     logger = logging.getLogger(__name__)
 
     logger.info(f"Creating attack of type {type(attack)}")
-    testloader = Create_data_loader()
+    testloader = Create_data_loader(batch_size=512)
     real_labels = []
     model_labels = []
     adversarial_examples = []
     adversarial_labels = []
+    label_confidence = []
+    adv_label_confidence = []
     for data in testloader:
         images, labels = data
         images_cpu = images.cpu().detach().numpy()
         x_test_adv = attack.generate(x=images_cpu,y=labels.cpu().numpy())
         with torch.no_grad():
-            predictions = np.argmax(classifier.predict(images_cpu),axis=1)
-            adversarial_predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
+            # perform inference
+            label_prob = classifier.predict(images_cpu)
+            adv_label_prob = classifier.predict(x_test_adv)
+            
+            # get confidence and labels for real data
+            predictions = np.argmax(label_prob,axis=1)
+            confidence_predictions = np.max(F.softmax(torch.tensor(label_prob),dim=1).cpu().numpy(),axis=1)
+            
+            # get confidence and labels for adversarial data
+            adversarial_predictions = np.argmax(adv_label_prob,axis=1)
+            confidence_predictions_adv = np.max(F.softmax(torch.tensor(adv_label_prob),dim=1).cpu().numpy(),axis=1)
+            
         
         adversarial_denorm = [denormalize(torch.tensor(x)) for x in x_test_adv]
-
+        
+        
+        label_confidence.extend(confidence_predictions)
+        adv_label_confidence.extend(confidence_predictions_adv)
         adversarial_examples.extend(adversarial_denorm)
         real_labels.extend(labels.cpu().numpy())
         model_labels.extend(predictions)
@@ -116,9 +130,13 @@ def Adversarial_generation(classifier, attack_params: Dict):
     all_real_labels = torch.tensor(real_labels)
     all_model_labels = torch.tensor(model_labels)
     all_adversarial_labels = torch.tensor(adversarial_labels)
-
+    all_confidence_labels = torch.tensor(label_confidence)
+    all_adversarial_confidence_labels = torch.tensor(adv_label_confidence)
+    
     adversarial_data = {
         "examples": all_adversarial_examples,
+        "confidence": all_confidence_labels,
+        "adversarial_confidence": all_adversarial_confidence_labels,
         "real_labels": all_real_labels,
         "model_labels": all_model_labels,
         "adversarial_labels": all_adversarial_labels,
@@ -130,59 +148,61 @@ def Adversarial_generation(classifier, attack_params: Dict):
     return adversarial_data
 
 
-def Fast_gradient_attack(classifier:art.estimators.classification.pytorch.PyTorchClassifier,attackparam:Dict)->Dict[str,Any]:
-    testloader = Create_data_loader()
-    real_labels = []
-    model_labels = []
-    aux=0
-    logger = logging.getLogger(__name__)
-    for eps in attackparam["eps"]:
-        logger.info(f"Starting to do FSGM with strength {eps}")
-        adversarial_examples = []
-        adversarial_labels = []
-        attack = FastGradientMethod(estimator=classifier,eps=eps)
-        for data in testloader:
-            images,labels = data
 
-            images_cpu = images.cpu().detach().numpy()
-            x_test_adv = attack.generate(x=images_cpu)
-            if aux==0:
 
-                with torch.no_grad():
-                    predictions = np.argmax(classifier.predict(images_cpu),axis=1)
-                    adversarial_predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
+# def Fast_gradient_attack(classifier:art.estimators.classification.pytorch.PyTorchClassifier,attackparam:Dict)->Dict[str,Any]:
+#     testloader = Create_data_loader()
+#     real_labels = []
+#     model_labels = []
+#     aux=0
+#     logger = logging.getLogger(__name__)
+#     for eps in attackparam["eps"]:
+#         logger.info(f"Starting to do FSGM with strength {eps}")
+#         adversarial_examples = []
+#         adversarial_labels = []
+#         attack = FastGradientMethod(estimator=classifier,eps=eps)
+#         for data in testloader:
+#             images,labels = data
 
-                adversarial_denorm = [denormalize(torch.tensor(x)) for x in x_test_adv]
-                # we keep the adversarial examples to use them later
-                adversarial_examples.extend(adversarial_denorm)
-                real_labels.extend(labels.cpu().numpy())
-                model_labels.extend(predictions)
-                adversarial_labels.extend(adversarial_predictions)
-            else:
+#             images_cpu = images.cpu().detach().numpy()
+#             x_test_adv = attack.generate(x=images_cpu)
+#             if aux==0:
 
-                with torch.no_grad():
-                    adversarial_predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
-                adversarial_denorm = [denormalize(torch.tensor(x)) for x in x_test_adv]
-                adversarial_examples.extend(adversarial_denorm)
-        if aux==0:
+#                 with torch.no_grad():
+#                     predictions = np.argmax(classifier.predict(images_cpu),axis=1)
+#                     adversarial_predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
 
-            all_adversarial_examples = torch.stack(adversarial_examples)
-            all_real_labels = torch.tensor(real_labels)
-            all_model_labels = torch.tensor(model_labels)
-            all_adversarial_labels = torch.tensor(adversarial_labels)
+#                 adversarial_denorm = [denormalize(torch.tensor(x)) for x in x_test_adv]
+#                 # we keep the adversarial examples to use them later
+#                 adversarial_examples.extend(adversarial_denorm)
+#                 real_labels.extend(labels.cpu().numpy())
+#                 model_labels.extend(predictions)
+#                 adversarial_labels.extend(adversarial_predictions)
+#             else:
 
-            adversarial_data = {
-                f"examples_{eps}": all_adversarial_examples,
-                "real_labels": all_real_labels,
-                "model_labels": all_model_labels,
-                f"adversarial_labels_{eps}": all_adversarial_labels,
-            }
-        else:
-            all_adversarial_examples = torch.stack(adversarial_examples)
-            all_adversarial_labels = torch.tensor(adversarial_labels)
+#                 with torch.no_grad():
+#                     adversarial_predictions = np.argmax(classifier.predict(x_test_adv),axis=1)
+#                 adversarial_denorm = [denormalize(torch.tensor(x)) for x in x_test_adv]
+#                 adversarial_examples.extend(adversarial_denorm)
+#         if aux==0:
 
-            adversarial_data[f"examples_{eps}"] = all_adversarial_examples
-            adversarial_data[f"adversarial_labels_{eps}"] = all_adversarial_labels
-        aux+=1
+#             all_adversarial_examples = torch.stack(adversarial_examples)
+#             all_real_labels = torch.tensor(real_labels)
+#             all_model_labels = torch.tensor(model_labels)
+#             all_adversarial_labels = torch.tensor(adversarial_labels)
 
-    return adversarial_data
+#             adversarial_data = {
+#                 f"examples_{eps}": all_adversarial_examples,
+#                 "real_labels": all_real_labels,
+#                 "model_labels": all_model_labels,
+#                 f"adversarial_labels_{eps}": all_adversarial_labels,
+#             }
+#         else:
+#             all_adversarial_examples = torch.stack(adversarial_examples)
+#             all_adversarial_labels = torch.tensor(adversarial_labels)
+
+#             adversarial_data[f"examples_{eps}"] = all_adversarial_examples
+#             adversarial_data[f"adversarial_labels_{eps}"] = all_adversarial_labels
+#         aux+=1
+
+#     return adversarial_data
