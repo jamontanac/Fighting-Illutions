@@ -10,7 +10,10 @@ class PytorchDatasetModel(AbstractDataSet):
         self._filepath = Path(filepath)
 
     def _load(self) -> Dict:
-        model = torch.load(self._filepath)
+        if torch.cuda.is_available():
+            model = torch.load(self._filepath)
+        else:
+            model = torch.load(self._filepath, map_location='cpu')
         return model
 
     def _save(self,model:torch.nn.Module) -> None:
