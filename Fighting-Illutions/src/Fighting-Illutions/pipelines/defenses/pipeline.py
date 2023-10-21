@@ -50,10 +50,6 @@ def create_pipeline(**kwargs) -> Pipeline:
     Attacks = ["DeepFool", "CarliniL2", "FSGM", "PGD"]
     Models = ["Resnet_model","Regnet_x_model","Regnet_y_model"]
     Defenses = ["Padding","Distortion","Padding_Distortion"]
-    
-    #  outputs={"Data_report_Padding":f"{model_ref}_Report_Padding_{attack_type}@Report",
-    #           "Data_report_Distortion":f"{model_ref}_Report_Distortion_{attack_type}@Report",
-    #           "Data_report_Padding_Distortion":f"{model_ref}_Report_Padding_Distortion_{attack_type}@Report"},
     Defense_pipeline=[]
     for index, model_ref in enumerate(Models):
         for attack_type in Attacks:
@@ -64,19 +60,10 @@ def create_pipeline(**kwargs) -> Pipeline:
                      outputs=output_result,
                      namespace=f"{model_ref}_Defenses_{attack_type}")
             Defense_pipeline.append(tmp_pipeline)
-        # Defense_pipeline = [
-        #     pipeline(pipe=defense_generation_templete(),
-        #              parameters={"params:defense_options":f"params:Parameters_defenses.{model_ref}"},
-        #              inputs={"Model":model_ref,"Adversarial_Data":f"{model_ref}_Adversarial_{attack_type}@Dataset"},
-        #              outputs={f"Data_report_{defense}": f"{model_ref}_Report_{defense}_{attack_type}@Report" for defense in Defenses}
-        #              namespace=f"{model_ref}_Defenses_{attack_type}")
-        #              for attack_type in Attacks
-        # ]
         if index==0:
             final_pipelines = sum(Defense_pipeline)
         else:
             final_pipelines += sum(Defense_pipeline)
 
     return final_pipelines
-    # return Pipeline([])
 
