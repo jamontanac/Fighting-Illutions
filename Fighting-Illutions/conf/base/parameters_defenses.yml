@@ -1,0 +1,19 @@
+# This is a boilerplate parameters config generated for pipeline 'defenses'
+# using Kedro 0.18.13.
+#
+# Documentation for this file format can be found in "Parameters"
+# Link: https://docs.kedro.org/en/0.18.13/configuration/parameters.html
+Parameters_defenses:
+  Classes: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+  Resnet_model:
+    window_size: 4
+    delta: 0.5
+    padding_ratio: 0.9 
+  Regnet_x_model:
+    window_size: 4
+    delta: 0.5 
+    padding_ratio: 0.9 
+  Regnet_y_model:
+    window_size: 4
+    delta: 0.5 
+    padding_ratio: 0.9 
