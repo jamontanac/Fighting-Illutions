@@ -17,7 +17,11 @@ https://kedro.readthedocs.io/en/stable/kedro_project_setup/settings.html."""
 # SESSION_STORE_ARGS = {
 #     "path": "./sessions"
 # }
+from kedro_viz.integrations.kedro.sqlite_store import SQLiteStore
+from pathlib import Path
 
+SESSION_STORE_CLASS = SQLiteStore
+SESSION_STORE_ARGS = {"path": str(Path(__file__).parents[2] / "data")}
 # Directory that holds configuration.
 CONF_SOURCE = "conf"
 

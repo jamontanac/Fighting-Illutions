@@ -37,3 +37,7 @@ Regnet_y_FSGM:
 "{model_type}_Adversarial_{attack}@Dataset":
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
   filepath:  data/04_feature/{model_type}_Adversarial_{attack}.pt
+
+"{model_ref}_Report_{defense}_{attack_type}@Report":
+  type: tracking.MetricsDataSet
+  filepath: data/08_reporting/{model_ref}_Report_{defense}_{attack_type}.json

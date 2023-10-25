@@ -18,6 +18,7 @@ from typing import Tuple, Dict
 import torch.nn as nn
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
+import torch.nn.functional as F
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 #We define the dataset to load the adversarial results
@@ -162,12 +163,13 @@ def Distort_defense(dataset: Dict, params:Dict) -> torch.utils.data.DataLoader:
 
 def Padding_Distort_defense(dataset: Dict, params:Dict) -> torch.utils.data.DataLoader:
     combined_transform = Compose([
-        PaddingTransform(ratio=params["ratio"]),
+        ResizePadTransform(ratio=params["padding_ratio"]),
         DistortTransform(d=params["window_size"], delta=params["delta"])
     ])
     dataset = AdversarialDataset(dataset, transform=combined_transform)
     dataloader = DataLoader(dataset, batch_size=512, shuffle=True)
     return dataloader
+
 def Report(dataloader:torch.utils.data.DataLoader,model:nn.Module):
     model_classifier = init_model(model)
     model_classifier.eval()

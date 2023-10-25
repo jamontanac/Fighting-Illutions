@@ -31,15 +31,15 @@ def defense_generation_templete() -> Pipeline:
                  name="Padding_Distortion_Defense"
                 ),
             node(func=Report,
-                 inputs=["Model","Padding_Defense_Loader_Image"],
+                 inputs=["Padding_Defense_Loader_Image","Model"],
                  outputs="Data_report_Padding",
                  name="Report_Padding"),
             node(func=Report,
-                 inputs=["Model","Distortion_Defense_Loader_Image"],
+                 inputs=["Distortion_Defense_Loader_Image","Model"],
                  outputs="Data_report_Distortion",
                  name="Report_Distortion"),
             node(func=Report,
-                 inputs=["Model","Padding_Distortion_Defense_Loader_Image"],
+                 inputs= ["Padding_Distortion_Defense_Loader_Image","Model"],
                  outputs="Data_report_Padding_Distortion",
                  name="Report_Padding_Distortion")
         ],inputs = ["Model","Adversarial_Data"],
@@ -56,7 +56,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             output_result = {f"Data_report_{defense}": f"{model_ref}_Report_{defense}_{attack_type}@Report" for defense in Defenses}
             tmp_pipeline = pipeline(pipe=defense_generation_templete(),
                      parameters={"params:defense_options":f"params:Parameters_defenses.{model_ref}"},
-                     inputs={"Model":model_ref,"Adversarial_Data":f"{model_ref}_Adversarial_{attack_type}@Dataset"},
+                     inputs={"Adversarial_Data":f"{model_ref}_Adversarial_{attack_type}@Dataset","Model":model_ref},
                      outputs=output_result,
                      namespace=f"{model_ref}_Defenses_{attack_type}")
             Defense_pipeline.append(tmp_pipeline)
