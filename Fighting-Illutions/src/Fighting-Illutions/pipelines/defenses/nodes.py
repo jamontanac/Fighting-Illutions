@@ -12,7 +12,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 import cv2
-from torchvision.transforms import Compose
+# from torchvision.transforms import Compose
 from typing import Tuple, Dict
 
 import torch.nn as nn
@@ -150,23 +150,30 @@ def init_model(model:nn.Module)->torch.nn.Module:
     return model
 
 def Padding_defense(dataset: Dict, params:Dict) -> torch.utils.data.DataLoader:
-    transform_fn = ResizePadTransform(ratio = params["padding_ratio"])
+    transform_fn = transforms.Compose([
+        ResizePadTransform(ratio = params["padding_ratio"]),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+        ])
     dataset = AdversarialDataset(dataset, transform=transform_fn)
     dataloader = DataLoader(dataset, batch_size=512, shuffle=True)
     return dataloader
 
 def Distort_defense(dataset: Dict, params:Dict) -> torch.utils.data.DataLoader:
-    transform_fn = DistortTransform(d = params["window_size"], delta=params["window_size"])
+    transform_fn = transforms.Compose([
+        DistortTransform(d = params["window_size"], delta=params["window_size"]),
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+        ])
     dataset = AdversarialDataset(dataset, transform=transform_fn)
     dataloader = DataLoader(dataset, batch_size=512, shuffle=True)
     return dataloader
 
 def Padding_Distort_defense(dataset: Dict, params:Dict) -> torch.utils.data.DataLoader:
-    combined_transform = Compose([
+    transform_fn = transforms.Compose([
+        DistortTransform(d=params["window_size"], delta=params["delta"]),
         ResizePadTransform(ratio=params["padding_ratio"]),
-        DistortTransform(d=params["window_size"], delta=params["delta"])
+        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
     ])
-    dataset = AdversarialDataset(dataset, transform=combined_transform)
+    dataset = AdversarialDataset(dataset, transform=transform_fn)
     dataloader = DataLoader(dataset, batch_size=512, shuffle=True)
     return dataloader
 
@@ -204,7 +211,7 @@ def Report(dataloader:torch.utils.data.DataLoader,model:nn.Module):
     original_accuracy = correct_model *100 /total
     adversarial_accuracy = correct_adversarial *100 /total
     defense_accuracy = correct_defense *100 /total
-    return {"accuracy":original_accuracy, "Adversarial_accuracy":adversarial_accuracy,"Defense_accuracy":defense_accuracy}
+    return {"Accuracy":original_accuracy, "Adversarial_accuracy":adversarial_accuracy,"Defense_accuracy":defense_accuracy}
 
 # Combined transform
 # combined_transform = Compose([
