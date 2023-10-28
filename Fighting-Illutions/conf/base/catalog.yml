@@ -23,15 +23,15 @@ Regnet_y_model:
   type: plotly.JSONDataSet
   filepath: data/08_reporting/{model_name}_plot_results.json
 
-Resnet_FSGM:
-  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
-  filepath: data/04_feature/Resnet_FSGM.pt
-Regnet_x_FSGM:
-  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
-  filepath: data/04_feature/Regnet_x_FSGM.pt
-Regnet_y_FSGM:
-  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
-  filepath: data/04_feature/Regnet_y_FSGM.pt
+# Resnet_FSGM:
+#   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+#   filepath: data/04_feature/Resnet_FSGM.pt
+# Regnet_x_FSGM:
+#   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+#   filepath: data/04_feature/Regnet_x_FSGM.pt
+# Regnet_y_FSGM:
+#   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+#   filepath: data/04_feature/Regnet_y_FSGM.pt
 
 
 "{model_type}_Adversarial_{attack}@Dataset":

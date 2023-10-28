@@ -1,0 +1,172 @@
+Regnet_x#_plot_result:
+  filepath: data/08_reporting/Regnet_x_plot_results.json
+  type: plotly.JSONDataSet
+Regnet_x#_report_train_test:
+  filepath: data/08_reporting/Regnet_x_loss_train_report.csv
+  type: pandas.CSVDataSet
+Regnet_x_model:
+  filepath: data/06_models/Regnet_x.pth
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
+Regnet_x_model_Adversarial_CarliniL2@Dataset:
+  filepath: data/04_feature/Regnet_x_model_Adversarial_CarliniL2.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_x_model_Adversarial_DeepFool@Dataset:
+  filepath: data/04_feature/Regnet_x_model_Adversarial_DeepFool.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_x_model_Adversarial_FSGM@Dataset:
+  filepath: data/04_feature/Regnet_x_model_Adversarial_FSGM.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_x_model_Adversarial_PGD@Dataset:
+  filepath: data/04_feature/Regnet_x_model_Adversarial_PGD.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_x_model_Report_Distortion_CarliniL2@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Distortion_CarliniL2.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Distortion_DeepFool@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Distortion_DeepFool.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Distortion_FSGM@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Distortion_FSGM.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Distortion_PGD@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Distortion_PGD.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_CarliniL2@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_CarliniL2.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_DeepFool@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_DeepFool.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_Distortion_CarliniL2@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_Distortion_CarliniL2.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_Distortion_DeepFool@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_Distortion_DeepFool.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_Distortion_FSGM@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_Distortion_FSGM.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_Distortion_PGD@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_Distortion_PGD.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_FSGM@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_FSGM.json
+  type: tracking.MetricsDataSet
+Regnet_x_model_Report_Padding_PGD@Report:
+  filepath: data/08_reporting/Regnet_x_model_Report_Padding_PGD.json
+  type: tracking.MetricsDataSet
+Regnet_y#_plot_result:
+  filepath: data/08_reporting/Regnet_y_plot_results.json
+  type: plotly.JSONDataSet
+Regnet_y#_report_train_test:
+  filepath: data/08_reporting/Regnet_y_loss_train_report.csv
+  type: pandas.CSVDataSet
+Regnet_y_model:
+  filepath: data/06_models/Resnet.pth
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
+Regnet_y_model_Adversarial_CarliniL2@Dataset:
+  filepath: data/04_feature/Regnet_y_model_Adversarial_CarliniL2.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_y_model_Adversarial_DeepFool@Dataset:
+  filepath: data/04_feature/Regnet_y_model_Adversarial_DeepFool.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_y_model_Adversarial_FSGM@Dataset:
+  filepath: data/04_feature/Regnet_y_model_Adversarial_FSGM.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_y_model_Adversarial_PGD@Dataset:
+  filepath: data/04_feature/Regnet_y_model_Adversarial_PGD.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Regnet_y_model_Report_Distortion_CarliniL2@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Distortion_CarliniL2.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Distortion_DeepFool@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Distortion_DeepFool.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Distortion_FSGM@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Distortion_FSGM.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Distortion_PGD@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Distortion_PGD.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_CarliniL2@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_CarliniL2.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_DeepFool@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_DeepFool.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_Distortion_CarliniL2@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_Distortion_CarliniL2.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_Distortion_DeepFool@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_Distortion_DeepFool.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_Distortion_FSGM@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_Distortion_FSGM.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_Distortion_PGD@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_Distortion_PGD.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_FSGM@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_FSGM.json
+  type: tracking.MetricsDataSet
+Regnet_y_model_Report_Padding_PGD@Report:
+  filepath: data/08_reporting/Regnet_y_model_Report_Padding_PGD.json
+  type: tracking.MetricsDataSet
+Resnet#_plot_result:
+  filepath: data/08_reporting/Resnet_plot_results.json
+  type: plotly.JSONDataSet
+Resnet#_report_train_test:
+  filepath: data/08_reporting/Resnet_loss_train_report.csv
+  type: pandas.CSVDataSet
+Resnet_model:
+  filepath: data/06_models/Resnet.pth
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetModel
+Resnet_model_Adversarial_CarliniL2@Dataset:
+  filepath: data/04_feature/Resnet_model_Adversarial_CarliniL2.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Resnet_model_Adversarial_DeepFool@Dataset:
+  filepath: data/04_feature/Resnet_model_Adversarial_DeepFool.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Resnet_model_Adversarial_FSGM@Dataset:
+  filepath: data/04_feature/Resnet_model_Adversarial_FSGM.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Resnet_model_Adversarial_PGD@Dataset:
+  filepath: data/04_feature/Resnet_model_Adversarial_PGD.pt
+  type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
+Resnet_model_Report_Distortion_CarliniL2@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Distortion_CarliniL2.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Distortion_DeepFool@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Distortion_DeepFool.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Distortion_FSGM@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Distortion_FSGM.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Distortion_PGD@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Distortion_PGD.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_CarliniL2@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_CarliniL2.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_DeepFool@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_DeepFool.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_Distortion_CarliniL2@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_Distortion_CarliniL2.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_Distortion_DeepFool@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_Distortion_DeepFool.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_Distortion_FSGM@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_Distortion_FSGM.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_Distortion_PGD@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_Distortion_PGD.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_FSGM@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_FSGM.json
+  type: tracking.MetricsDataSet
+Resnet_model_Report_Padding_PGD@Report:
+  filepath: data/08_reporting/Resnet_model_Report_Padding_PGD.json
+  type: tracking.MetricsDataSet
+
