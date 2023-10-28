@@ -6,14 +6,14 @@
 Parameters_defenses:
   Classes: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
   Resnet_model:
-    window_size: 8
-    delta: 0.1
+    window_size: 10
+    delta: 0.7
     padding_ratio: 0.9 
   Regnet_x_model:
-    window_size: 8
-    delta: 0.1 
+    window_size: 10
+    delta: 0.9 
     padding_ratio: 0.9 
   Regnet_y_model:
-    window_size: 8
-    delta: 0.1 
+    window_size: 10
+    delta: 0.6 
     padding_ratio: 0.9 
