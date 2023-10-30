@@ -34,17 +34,17 @@ def KL_divergence(p,q):
 
     return (p*(p/q).log()).sum().item()
 
-def plot_confidence_distribution_single_class(data, class_name,title):
+def plot_confidence_distribution_single_class(data, class_name):
     g = sns.PairGrid(data, diag_sharey=False)
     g.map_upper(sns.kdeplot, levels=12, cmap="icefire")
     g.map_lower(sns.kdeplot, levels=7, cmap="icefire")
     g.map_lower(sns.scatterplot, s=10)
     g.map_diag(sns.histplot, bins=32, stat="density", element="step")
-    g.fig.suptitle(f'{class_name} Distributions {title}')
+    g.fig.suptitle(f'{class_name} Distributions')
     plt.tight_layout()
     return g.fig  # Return the figure object
 
-def plot_confidence_distribution_all(Confidences, Labels, classes, title):
+def plot_confidence_distribution_all(Confidences, Labels, classes):
     figs = []  # List to store individual figures
     Distances = {}
     confidences_model = Confidences["model_confidence"]
@@ -63,7 +63,7 @@ def plot_confidence_distribution_all(Confidences, Labels, classes, title):
         Distances[class_name] = {"Adversarial":KL_divergence(adv_hist,model_hist),"Defense":KL_divergence(def_hist,model_hist)}
         data = pd.DataFrame({"Model": values_model, "Adversarial": values_adversarial, "Defense": values_defense})
         
-        fig = plot_confidence_distribution_single_class(data, class_name, title)
+        fig = plot_confidence_distribution_single_class(data, class_name)
         figs.append(fig)
     return figs, Distances
 # figs, dists = plot_confidence_distribution_all(confidences,labels,classes,"Regnet_DeepFool_Distortion") 
@@ -282,7 +282,7 @@ def Padding_Distort_defense(dataset: Dict, params:Dict) -> torch.utils.data.Data
     return dataloader
 
 
-def Report(dataloader:torch.utils.data.DataLoader,model:nn.Module,Report_params:Dict,title:str) -> Tuple[Dict,Dict,go.Figure,List[matplt.Figure]]:
+def Report(dataloader:torch.utils.data.DataLoader,model:nn.Module,Report_params:Dict) -> Tuple[Dict,Dict,go.Figure,List[matplt.Figure]]:
     model_classifier = init_model(model)
     model_classifier.eval()
     correct_defense = 0
@@ -334,7 +334,7 @@ def Report(dataloader:torch.utils.data.DataLoader,model:nn.Module,Report_params:
                    "defense_confidence":confidence_defense}
     
     Classes = Report_params["Classes"]
-    figs, Kl_dists = plot_confidence_distribution_all(Confidences,Labels,Classes,title) 
+    figs, Kl_dists = plot_confidence_distribution_all(Confidences,Labels,Classes) 
     conf_matrix = plot_confusion_matrix(labels=Labels,classes=Classes)
     
     return Accuracies,Kl_dists,conf_matrix ,figs
