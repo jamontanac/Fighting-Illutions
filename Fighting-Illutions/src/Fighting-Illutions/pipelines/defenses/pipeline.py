@@ -75,10 +75,10 @@ def create_pipeline(**kwargs) -> Pipeline:
     Defense_pipeline = []
     for index, model_ref in enumerate(Models):
         for attack_type in Attacks:
-            output_result = {f"Accuracy_report_{defense}": f"{model_ref}_Accuracy_{defense}_{attack_type}@Report" for defense in Defenses}
-            output_result.update({f"KL_report_{defense}":f"{model_ref}_KLdiff_{defense}_{attack_type}@Report" for defense in Defenses})
-            output_result.update({f"Conf_matrix_{defense}":f"{model_ref}_confusionMatrix_{defense}_{attack_type}@Plots" for defense in Defenses})
-            output_result.update({f"Distributions_{defense}":f"{model_ref}_Distribution_{defense}_{attack_type}@Plots" for defense in Defenses})
+            output_result = {f"Accuracy_report_{defense}": f"{model_ref}_Accuracy_{defense}_{attack_type}" for defense in Defenses}
+            output_result.update({f"KL_report_{defense}":f"{model_ref}_KLdiff_{defense}_{attack_type}" for defense in Defenses})
+            output_result.update({f"Conf_matrix_{defense}":f"{model_ref}_confusionMatrix_{defense}_{attack_type}" for defense in Defenses})
+            output_result.update({f"Distributions_{defense}":f"{model_ref}_Distribution_{defense}_{attack_type}" for defense in Defenses})
             
             tmp_pipeline = pipeline( pipe=defense_generation_templete(),
                      parameters={"params:defense_options":f"params:Parameters_defenses.{model_ref}",
