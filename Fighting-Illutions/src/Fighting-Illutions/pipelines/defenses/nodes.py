@@ -11,7 +11,7 @@ import torchvision
 import torchvision.transforms as transforms
 import cv2
 from typing import Tuple, Dict, List
-
+import pandas as pd
 import torch.nn as nn
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
@@ -60,7 +60,8 @@ def plot_confidence_distribution_all(Confidences, Labels, classes):
         model_hist = torch.histc(torch.Tensor(values_model),bins=32,min=0,max=1)
         adv_hist = torch.histc(torch.Tensor(values_adversarial),bins=32,min=0,max=1)
         def_hist = torch.histc(torch.Tensor(values_defense),bins=32,min=0,max=1)
-        Distances[class_name] = {"Adversarial":KL_divergence(adv_hist,model_hist),"Defense":KL_divergence(def_hist,model_hist)}
+        Distances[f"{class_name}_Adversarial"] = KL_divergence(adv_hist,model_hist)
+        Distances[f"{class_name}_Defense"] = KL_divergence(def_hist,model_hist)
         data = pd.DataFrame({"Model": values_model, "Adversarial": values_adversarial, "Defense": values_defense})
         
         fig = plot_confidence_distribution_single_class(data, class_name)

@@ -30,3 +30,18 @@ Regnet_y_model:
 "{model_ref}_Accuracy_{defense}_{attack_type}@Report":
   type: tracking.MetricsDataSet
   filepath: data/08_reporting/{model_ref}_Accuracy_{defense}_{attack_type}.json
+
+
+"{model_ref}_KLdiff_{defense}_{attack_type}@Report":
+  type: tracking.MetricsDataSet
+  filepath: data/08_reporting/{model_ref}_KLdiff_{defense}_{attack_type}.json
+
+
+"{model_ref}_confusionMatrix_{defense}_{attack_type}@Plots":
+  type: plotly.JSONDataSet
+  filepath: data/08_reporting/Confusion_matrix_plots/{model_ref}_ConfusionMatrix_{defense}_{attack_type}.json
+  versioned: true
+"{model_ref}_Distribution_{defense}_{attack_type}@Plots":
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/Distributions_plots/{model_ref}_Distriutions_{defense}_{attack_type}
+  versioned: true
