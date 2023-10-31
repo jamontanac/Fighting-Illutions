@@ -56,51 +56,51 @@ Regnet_x_model_Adversarial_PGD@Dataset:
   filepath: data/04_feature/Regnet_x_model_Adversarial_PGD.pt
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
 Regnet_x_model_Distribution_Distortion_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Distortion_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Distortion_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Distortion_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Distortion_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Distortion_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Distortion_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Distortion_FSGM
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Distortion_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Distortion_PGD:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Distortion_PGD
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Distortion_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_Distortion_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_Distortion_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_Distortion_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_Distortion_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_Distortion_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_Distortion_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_Distortion_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_Distortion_FSGM
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_Distortion_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_Distortion_PGD:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_Distortion_PGD
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_Distortion_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_FSGM
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_Distribution_Padding_PGD:
-  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distriutions_Padding_PGD
+  filepath: data/08_reporting/Distributions_plots/Regnet_x_model_Distributions_Padding_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_x_model_KLdiff_Distortion_CarliniL2:
@@ -245,51 +245,51 @@ Regnet_y_model_Adversarial_PGD@Dataset:
   filepath: data/04_feature/Regnet_y_model_Adversarial_PGD.pt
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
 Regnet_y_model_Distribution_Distortion_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Distortion_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Distortion_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Distortion_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Distortion_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Distortion_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Distortion_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Distortion_FSGM
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Distortion_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Distortion_PGD:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Distortion_PGD
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Distortion_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_Distortion_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_Distortion_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_Distortion_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_Distortion_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_Distortion_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_Distortion_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_Distortion_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_Distortion_FSGM
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_Distortion_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_Distortion_PGD:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_Distortion_PGD
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_Distortion_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_FSGM
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_Distribution_Padding_PGD:
-  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distriutions_Padding_PGD
+  filepath: data/08_reporting/Distributions_plots/Regnet_y_model_Distributions_Padding_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Regnet_y_model_KLdiff_Distortion_CarliniL2:
@@ -434,51 +434,51 @@ Resnet_model_Adversarial_PGD@Dataset:
   filepath: data/04_feature/Resnet_model_Adversarial_PGD.pt
   type: Fighting-Illutions.extras.datasets.pytorch_dataset.PytorchDatasetDict
 Resnet_model_Distribution_Distortion_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Distortion_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Distortion_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Distortion_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Distortion_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Distortion_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Distortion_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Distortion_FSGM
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Distortion_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Distortion_PGD:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Distortion_PGD
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Distortion_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_Distortion_CarliniL2:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_Distortion_CarliniL2
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_Distortion_CarliniL2
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_Distortion_DeepFool:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_Distortion_DeepFool
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_Distortion_DeepFool
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_Distortion_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_Distortion_FSGM
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_Distortion_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_Distortion_PGD:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_Distortion_PGD
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_Distortion_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_FSGM:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_FSGM
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_FSGM
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_Distribution_Padding_PGD:
-  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distriutions_Padding_PGD
+  filepath: data/08_reporting/Distributions_plots/Resnet_model_Distributions_Padding_PGD
   type: matplotlib.MatplotlibWriter
   versioned: true
 Resnet_model_KLdiff_Distortion_CarliniL2:

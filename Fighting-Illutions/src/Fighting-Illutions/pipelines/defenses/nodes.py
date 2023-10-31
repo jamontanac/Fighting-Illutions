@@ -45,7 +45,7 @@ def plot_confidence_distribution_single_class(data, class_name):
     return g.fig  # Return the figure object
 
 def plot_confidence_distribution_all(Confidences, Labels, classes):
-    figs = []  # List to store individual figures
+    figs = {}  # List to store individual figures
     Distances = {}
     confidences_model = Confidences["model_confidence"]
     confidences_adversarial = Confidences["adversarial_confidence"]
@@ -65,7 +65,8 @@ def plot_confidence_distribution_all(Confidences, Labels, classes):
         data = pd.DataFrame({"Model": values_model, "Adversarial": values_adversarial, "Defense": values_defense})
         
         fig = plot_confidence_distribution_single_class(data, class_name)
-        figs.append(fig)
+        figs[f"{class_name}.png"] = fig
+        # figs.append(fig)
     return figs, Distances
 # figs, dists = plot_confidence_distribution_all(confidences,labels,classes,"Regnet_DeepFool_Distortion") 
 
